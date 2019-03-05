@@ -1,0 +1,329 @@
+<?xml version="1.0" ?>
+<!--This does not replace URDF, and is not an extension of URDF.
+    This is a format for representing semantic information about the robot structure.
+    A URDF file must exist for this robot as well, where the joints and the links that are referenced are defined
+-->
+<robot name="ur5">
+    <!--GROUPS: Representation of a set of joints and links. This can be useful for specifying DOF to plan for, defining arms, end effectors, etc-->
+    <!--LINKS: When a link is specified, the parent joint of that link (if it exists) is automatically included-->
+    <!--JOINTS: When a joint is specified, the child link of that joint (which will always exist) is automatically included-->
+    <!--CHAINS: When a chain is specified, all the links along the chain (including endpoints) are included in the group. Additionally, all the joints that are parents to included links are also included. This means that joints along the chain and the parent joint of the base link are included in the group-->
+    <!--SUBGROUPS: Groups can also be formed by referencing to already defined group names-->
+    <group name="ur5">
+        <joint name="shoulder_pan_joint" />
+        <joint name="shoulder_lift_joint" />
+        <joint name="elbow_joint" />
+        <joint name="wrist_1_joint" />
+        <joint name="wrist_2_joint" />
+        <joint name="wrist_3_joint" />
+    </group>
+    <group name="seed_hand">
+        <link name="wrist_3_link" />
+        <link name="ee_link" />
+        <link name="base_of_hand" />
+        <link name="forearm" />
+        <link name="palm axis" />
+        <link name="palm" />
+        <link name="Iproximal" />
+        <link name="Imiddle" />
+        <link name="Itip" />
+        <link name="Mproximal" />
+        <link name="Mmiddle" />
+        <link name="Mtip" />
+        <link name="Pproximal" />
+        <link name="Pmiddle" />
+        <link name="Ptip" />
+        <link name="Rproximal" />
+        <link name="Rmiddle" />
+        <link name="Rtip" />
+        <link name="thumb base" />
+        <link name="Tproximal" />
+        <link name="Tmiddle" />
+        <link name="Ttip" />
+        <joint name="ee_fixed_joint" />
+        <joint name="base_joint" />
+        <joint name="forearm__base" />
+        <joint name="palm_axis__forearm" />
+        <joint name="palm__palm_axis" />
+        <joint name="Iproximal__palm" />
+        <joint name="Imiddle__Iproximal" />
+        <joint name="Itip__Imiddle" />
+        <joint name="Mproximal__palm" />
+        <joint name="Mmiddle__Mproximal" />
+        <joint name="Mtip__Mmiddle" />
+        <joint name="Pproximal__palm" />
+        <joint name="Pmiddle__Pproximal" />
+        <joint name="Ptip__Pmiddle" />
+        <joint name="Rproximal__palm" />
+        <joint name="Rmiddle__Rproximal" />
+        <joint name="Rtip__Rmiddle" />
+        <joint name="palm__thumb_base" />
+        <joint name="Tproximal__thumb_base" />
+        <joint name="Tmiddle__Tproximal" />
+        <joint name="Ttip__Tmiddle" />
+    </group>
+    <!--GROUP STATES: Purpose: Define a named state for a particular group, in terms of joint values. This is useful to define states like 'folded arms'-->
+    <group_state name="up" group="ur5">
+        <joint name="elbow_joint" value="0" />
+        <joint name="shoulder_lift_joint" value="-1.57" />
+        <joint name="shoulder_pan_joint" value="0" />
+        <joint name="wrist_1_joint" value="-1.57" />
+        <joint name="wrist_2_joint" value="0" />
+        <joint name="wrist_3_joint" value="0" />
+    </group_state>
+    <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
+    <end_effector name="moveit_seedhand" parent_link="wrist_3_link" group="seed_hand" parent_group="ur5" />
+    <!--PASSIVE JOINT: Purpose: this element is used to mark joints that are not actuated-->
+    <passive_joint name="forearm__base" />
+    <!--DISABLE COLLISIONS: By default it is assumed that any link of the robot could potentially come into collision with any other link in the robot. This tag disables collision checking between a specified pair of links. -->
+    <disable_collisions link1="Imiddle" link2="Iproximal" reason="Adjacent" />
+    <disable_collisions link1="Imiddle" link2="Itip" reason="Adjacent" />
+    <disable_collisions link1="Imiddle" link2="Mmiddle" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Mproximal" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Mtip" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="forearm" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="palm" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Imiddle" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Itip" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Mmiddle" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Mproximal" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Mtip" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="forearm" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="palm" reason="Adjacent" />
+    <disable_collisions link1="Iproximal" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Iproximal" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Itip" link2="Mmiddle" reason="Never" />
+    <disable_collisions link1="Itip" link2="Mproximal" reason="Never" />
+    <disable_collisions link1="Itip" link2="Mtip" reason="Never" />
+    <disable_collisions link1="Itip" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Itip" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Itip" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Itip" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Itip" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Itip" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Itip" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Itip" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Itip" link2="forearm" reason="Never" />
+    <disable_collisions link1="Itip" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Itip" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Itip" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Itip" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Itip" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="Mproximal" reason="Adjacent" />
+    <disable_collisions link1="Mmiddle" link2="Mtip" reason="Adjacent" />
+    <disable_collisions link1="Mmiddle" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="forearm" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="palm" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Mmiddle" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Mtip" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="forearm" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="palm" reason="Adjacent" />
+    <disable_collisions link1="Mproximal" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Mproximal" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Mtip" link2="Pmiddle" reason="Never" />
+    <disable_collisions link1="Mtip" link2="Pproximal" reason="Never" />
+    <disable_collisions link1="Mtip" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Mtip" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Mtip" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Mtip" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Mtip" link2="forearm" reason="Never" />
+    <disable_collisions link1="Mtip" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Mtip" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Mtip" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Mtip" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Mtip" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Pproximal" reason="Adjacent" />
+    <disable_collisions link1="Pmiddle" link2="Ptip" reason="Adjacent" />
+    <disable_collisions link1="Pmiddle" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="Ttip" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="forearm" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="palm" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Pmiddle" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Ptip" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="Ttip" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="forearm" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="palm" reason="Adjacent" />
+    <disable_collisions link1="Pproximal" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Pproximal" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Rmiddle" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Rproximal" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Ptip" link2="Ttip" reason="Never" />
+    <disable_collisions link1="Ptip" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Ptip" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Ptip" link2="forearm" reason="Never" />
+    <disable_collisions link1="Ptip" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Ptip" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Ptip" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Ptip" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Ptip" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="Rproximal" reason="Adjacent" />
+    <disable_collisions link1="Rmiddle" link2="Rtip" reason="Adjacent" />
+    <disable_collisions link1="Rmiddle" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="forearm" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="palm" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Rmiddle" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="Rtip" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="Tmiddle" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="Ttip" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="forearm" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="palm" reason="Adjacent" />
+    <disable_collisions link1="Rproximal" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Rproximal" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Rtip" link2="Tproximal" reason="Never" />
+    <disable_collisions link1="Rtip" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Rtip" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Rtip" link2="forearm" reason="Never" />
+    <disable_collisions link1="Rtip" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Rtip" link2="thumb base" reason="Never" />
+    <disable_collisions link1="Rtip" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Rtip" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Rtip" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="Tproximal" reason="Adjacent" />
+    <disable_collisions link1="Tmiddle" link2="Ttip" reason="Adjacent" />
+    <disable_collisions link1="Tmiddle" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="forearm" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Tmiddle" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="Ttip" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="forearm" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="palm" reason="Default" />
+    <disable_collisions link1="Tproximal" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="thumb base" reason="Adjacent" />
+    <disable_collisions link1="Tproximal" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Tproximal" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="Ttip" link2="base_of_hand" reason="Never" />
+    <disable_collisions link1="Ttip" link2="ee_link" reason="Never" />
+    <disable_collisions link1="Ttip" link2="forearm" reason="Never" />
+    <disable_collisions link1="Ttip" link2="palm axis" reason="Never" />
+    <disable_collisions link1="Ttip" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="Ttip" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="Ttip" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="base_link" link2="shoulder_link" reason="Adjacent" />
+    <disable_collisions link1="base_of_hand" link2="ee_link" reason="Adjacent" />
+    <disable_collisions link1="base_of_hand" link2="forearm" reason="Adjacent" />
+    <disable_collisions link1="base_of_hand" link2="palm" reason="Never" />
+    <disable_collisions link1="base_of_hand" link2="palm axis" reason="Never" />
+    <disable_collisions link1="base_of_hand" link2="thumb base" reason="Never" />
+    <disable_collisions link1="base_of_hand" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="base_of_hand" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="base_of_hand" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="ee_link" link2="forearm" reason="Never" />
+    <disable_collisions link1="ee_link" link2="palm" reason="Never" />
+    <disable_collisions link1="ee_link" link2="palm axis" reason="Never" />
+    <disable_collisions link1="ee_link" link2="thumb base" reason="Never" />
+    <disable_collisions link1="ee_link" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="ee_link" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="ee_link" link2="wrist_3_link" reason="Adjacent" />
+    <disable_collisions link1="forearm" link2="palm axis" reason="Adjacent" />
+    <disable_collisions link1="forearm" link2="thumb base" reason="Never" />
+    <disable_collisions link1="forearm" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="forearm" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="forearm" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="forearm_link" link2="upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="forearm_link" link2="wrist_1_link" reason="Adjacent" />
+    <disable_collisions link1="palm" link2="palm axis" reason="Adjacent" />
+    <disable_collisions link1="palm" link2="thumb base" reason="Adjacent" />
+    <disable_collisions link1="palm" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="palm" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="palm" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="palm axis" link2="thumb base" reason="Never" />
+    <disable_collisions link1="palm axis" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="palm axis" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="palm axis" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="shoulder_link" link2="upper_arm_link" reason="Adjacent" />
+    <disable_collisions link1="thumb base" link2="wrist_1_link" reason="Never" />
+    <disable_collisions link1="thumb base" link2="wrist_2_link" reason="Never" />
+    <disable_collisions link1="thumb base" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="wrist_1_link" link2="wrist_2_link" reason="Adjacent" />
+    <disable_collisions link1="wrist_1_link" link2="wrist_3_link" reason="Never" />
+    <disable_collisions link1="wrist_2_link" link2="wrist_3_link" reason="Adjacent" />
+</robot>

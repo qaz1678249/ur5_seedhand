@@ -1,0 +1,31 @@
+controller_list:
+  - name: fake_ur5_controller
+    joints:
+      - shoulder_pan_joint
+      - shoulder_lift_joint
+      - elbow_joint
+      - wrist_1_joint
+      - wrist_2_joint
+      - wrist_3_joint
+  - name: fake_seed_hand_controller
+    joints:
+      - wrist_3_joint
+      - forearm__base
+      - palm_axis__forearm
+      - palm__palm_axis
+      - Iproximal__palm
+      - Imiddle__Iproximal
+      - Itip__Imiddle
+      - Mproximal__palm
+      - Mmiddle__Mproximal
+      - Mtip__Mmiddle
+      - Pproximal__palm
+      - Pmiddle__Pproximal
+      - Ptip__Pmiddle
+      - Rproximal__palm
+      - Rmiddle__Rproximal
+      - Rtip__Rmiddle
+      - palm__thumb_base
+      - Tproximal__thumb_base
+      - Tmiddle__Tproximal
+      - Ttip__Tmiddle
